@@ -266,14 +266,19 @@ public final class Analyser {
     private void analyseConstantExpression() throws CompileError {
         
     	if(nextIf(TokenType.Plus) != null || nextIf(TokenType.Minus) != null);
-    	
         expect(TokenType.Uint);
     }
 
     private void analyseExpression() throws CompileError {
+    	int flag = 0;
     	analyseItem();
-    	while(nextIf(TokenType.Plus) != null || nextIf(TokenType.Minus) != null) {
+    	while(check(TokenType.Plus) || check(TokenType.Minus)) {
+    		if(nextIf(TokenType.Plus) != null)flag = 1;
+    		else if(nextIf(TokenType.Mius) != null)flag = 2;
     		analyseItem();
+    		if(flag == 1)instructions.add(new Instruction(Operation.ADD));
+    		else instructions.add(new Instruction(Operation.SUB));
+    		
     	}
     }
 
@@ -296,9 +301,17 @@ public final class Analyser {
     }
 
     private void analyseItem() throws CompileError {
+    	int flag = 0;
+    	
+    	
     	analyseFactor();
-    	while(nextIf(TokenType.Mult) != null || nextIf(TokenType.Div) != null) {
+    	while(check(TokenType.Mult) || check(TokenType.Div)) {
+    		if(nextIf(TokenType.Mult) != null)flag = 1;
+    		else if(nextIf(TokenType.Div) != null)flag = 2;
     		analyseFactor();
+    		if(flag == 1)instructions.add(new Instruction(Operation.MUL));
+    		else instructions.add(new Instruction(Operation.DIV));
+    		
     	}
     }
 
