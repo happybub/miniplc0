@@ -274,7 +274,7 @@ public final class Analyser {
     	analyseItem();
     	while(check(TokenType.Plus) || check(TokenType.Minus)) {
     		if(nextIf(TokenType.Plus) != null)flag = 1;
-    		else if(nextIf(TokenType.Mius) != null)flag = 2;
+    		else if(nextIf(TokenType.Minus) != null)flag = 2;
     		analyseItem();
     		if(flag == 1)instructions.add(new Instruction(Operation.ADD));
     		else instructions.add(new Instruction(Operation.SUB));
