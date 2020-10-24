@@ -206,7 +206,7 @@ public final class Analyser {
     	analyseConstantDeclaration();
     	analyseVariableDeclaration();
     	analyseStatementSequence();
-    	throw new Error("Not implemented");
+    	
     }
 
     private void analyseConstantDeclaration() throws CompileError {
@@ -333,7 +333,7 @@ public final class Analyser {
             
             
         } else if (check(TokenType.Uint)) {
-            expect(TokenType.Ident);
+            expect(TokenType.Uint);
         } else if (check(TokenType.LParen)) {
             expect(TokenType.LParen);
             analyseExpression();

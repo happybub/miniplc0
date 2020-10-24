@@ -51,7 +51,7 @@ public class Tokenizer {
     	Pos tempBegin = new Pos(it.currentPos().row, it.currentPos().col);
     	int tempNum = 0;
     	while(Character.isDigit(it.peekChar())) {
-    		tempNum = tempNum * 10 + Integer.valueOf(it.nextChar());
+    		tempNum = tempNum * 10 + it.nextChar() - 48;
     	}
     	
     	return new Token(TokenType.Uint, tempNum ,tempBegin ,it.currentPos());
@@ -77,15 +77,15 @@ public class Tokenizer {
     	}
     	String tempString = tempStringBuilder.toString().toLowerCase();
     	switch(tempString) {
-	    	case "Begin":
+    		case "begin":
 				return new Token(TokenType.Begin, tempString, tempBegin, it.currentPos());
-			case "End":
+			case "end":
 				return new Token(TokenType.End, tempString, tempBegin, it.currentPos());
-			case "Const":
+			case "const":
 				return new Token(TokenType.Const, tempString, tempBegin, it.currentPos());
-			case "Var":
+			case "var":
 				return new Token(TokenType.Var, tempString, tempBegin, it.currentPos());
-			case "Print":
+			case "print":
 				return new Token(TokenType.Print, tempString, tempBegin, it.currentPos());
 			default:
 				return new Token(TokenType.Ident, tempString, tempBegin, it.currentPos());
