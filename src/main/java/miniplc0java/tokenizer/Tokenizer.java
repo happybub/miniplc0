@@ -70,12 +70,12 @@ public class Tokenizer {
         // Token 的 Value 应填写标识符或关键字的字符串
     	Pos tempBegin = new Pos(it.currentPos().row, it.currentPos().col);
     	StringBuilder tempStringBuilder = new StringBuilder("");
-    	String tempString = tempStringBuilder.toString();
+    	
     	
     	while(Character.isLetterOrDigit(it.peekChar())) {
     		tempStringBuilder.append(it.nextChar());
     	}
-    	
+    	String tempString = tempStringBuilder.toString();
     	switch(tempString) {
 	    	case "Begin":
 				return new Token(TokenType.Begin, tempString, tempBegin, it.currentPos());
@@ -88,7 +88,7 @@ public class Tokenizer {
 			case "Print":
 				return new Token(TokenType.Print, tempString, tempBegin, it.currentPos());
 			default:
-			return new Token(TokenType.Ident, tempString, tempBegin, it.currentPos());
+				return new Token(TokenType.Ident, tempString, tempBegin, it.currentPos());
     	}
         //throw new Error("Not implemented");
     }
