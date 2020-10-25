@@ -51,8 +51,8 @@ public class Tokenizer {
     	while(Character.isLetterOrDigit(it.peekChar())) {
     		tempStringBuilder.append(it.nextChar());
     	}
-    	String tempString = tempStringBuilder.toString().toLowerCase();
-    	switch(tempString) {
+    	String tempString = tempStringBuilder.toString();
+    	switch(tempString.toLowerCase()) {
     		case "begin":
 				return new Token(TokenType.Begin, tempString, tempBegin, it.currentPos());
 			case "end":
